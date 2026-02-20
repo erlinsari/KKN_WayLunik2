@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Laporan KKN – Kelurahan Way Lunik 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+/* ============================================
+   ROOT VARIABLES & RESET
+   ============================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --forest:   #1B5E20;
+  --green:    #2E7D32;
+  --mid:      #388E3C;
+  --lime:     #66BB6A;
+  --light:    #C8E6C9;
+  --xlight:   #E8F5E9;
+  --gold:     #F9A825;
+  --amber:    #FFB300;
+  --dark:     #0D1B0F;
+  --charcoal: #1C2B1E;
+  --gray:     #546E7A;
+  --offwhite: #F9FAF7;
+  --white:    #FFFFFF;
+  --teal:     #00695C;
+  --orange:   #E65100;
+  --red:      #C62828;
+  --blue:     #01579B;
+}
+
+html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'DM Sans', sans-serif; background: #000; }
+
+/* ============================================
+   SLIDE ENGINE
+   ============================================ */
+.deck {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s cubic-bezier(.4,0,.2,1), transform 0.6s cubic-bezier(.4,0,.2,1);
+  transform: translateX(60px);
+  overflow: hidden;
+}
+.slide.active {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(0);
+}
+.slide.prev {
+  opacity: 0;
+  transform: translateX(-60px);
+  pointer-events: none;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.nav {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 999;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50px;
+  padding: 8px 20px;
+}
+.nav button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.nav button:hover { background: rgba(255,255,255,0.15); }
+.nav-counter {
+  color: rgba(255,255,255,0.8);
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  min-width: 60px;
+  text-align: center;
+}
+.nav-dots {
+  display: flex; gap: 6px; align-items: center;
+}
+.nav-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.nav-dot.active { background: var(--gold); width: 20px; border-radius: 3px; }
+
+.slide-label {
+  position: fixed;
+  top: 18px;
+  right: 24px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: rgba(255,255,255,0.5);
+  z-index: 999;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ============================================
+   SLIDE 1 — COVER
+   ============================================ */
+#s1 {
+  background: var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#s1 .bg-mesh {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 15% 50%, rgba(27,94,32,0.6) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 85% 20%, rgba(0,105,92,0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 50% 90%, rgba(249,168,37,0.15) 0%, transparent 60%);
+}
+#s1 .noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+#s1 .grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(102,187,106,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(102,187,106,0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+#s1 .gold-bar-top {
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--forest), var(--gold), var(--green));
+}
+#s1 .gold-bar-bottom {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--green), var(--gold), var(--forest));
+}
+#s1 .cover-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 900px;
+  padding: 0 40px;
+  animation: fadeUp 1s ease both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+#s1 .tag {
+  display: inline-block;
+  border: 1px solid rgba(102,187,106,0.5);
+  color: var(--lime);
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 4px;
+  padding: 6px 18px;
+  border-radius: 2px;
+  margin-bottom: 28px;
+  animation: fadeUp 1s 0.2s ease both;
+}
+#s1 h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.05;
+  margin-bottom: 10px;
+  animation: fadeUp 1s 0.4s ease both;
+}
+#s1 h1 span { color: var(--gold); }
+#s1 .subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.65);
+  letter-spacing: 2px;
+  margin-bottom: 36px;
+  animation: fadeUp 1s 0.5s ease both;
+}
+#s1 .divider {
+  width: 80px; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 0 auto 36px;
+  animation: fadeUp 1s 0.6s ease both;
+}
+#s1 .info-row {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  animation: fadeUp 1s 0.7s ease both;
+  flex-wrap: wrap;
+}
+#s1 .info-item {
+  text-align: center;
+}
+#s1 .info-item .val {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gold);
+}
+#s1 .info-item .lbl {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 2px;
+  margin-top: 2px;
+  text-transform: uppercase;
+}
+#s1 .location {
+  margin-top: 32px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 1px;
+  animation: fadeUp 1s 0.9s ease both;
+}
+#s1 .location strong { color: rgba(255,255,255,0.75); }
+
+/* ============================================
+   SLIDE 2 — AGENDA
+   ============================================ */
+#s2 { background: var(--offwhite); }
+#s2 .s-header {
+  background: var(--forest);
+  padding: 36px 60px 28px;
+  position: relative;
+}
+#s2 .s-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--lime), var(--gold));
+}
+#s2 .s-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--lime);
+  margin-bottom: 6px;
+}
+#s2 .s-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--white);
+}
+#s2 .agenda-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 28px 60px 80px;
+}
+#s2 .agenda-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: white;
+  border-radius: 8px;
+  padding: 18px 20px;
+  border-left: 4px solid var(--forest);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: default;
+}
+#s2 .agenda-item:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+#s2 .agenda-item:nth-child(2) { border-color: var(--teal); }
+#s2 .agenda-item:nth-child(3) { border-color: var(--green); }
+#s2 .agenda-item:nth-child(4) { border-color: var(--gold); }
+#s2 .agenda-item:nth-child(5) { border-color: var(--red); }
+#s2 .agenda-item:nth-child(6) { border-color: var(--orange); }
+#s2 .agenda-item:nth-child(7) { border-color: var(--blue); }
+#s2 .a-num {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--forest);
+  color: white;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+#s2 .agenda-item:nth-child(2) .a-num { background: var(--teal); }
+#s2 .agenda-item:nth-child(3) .a-num { background: var(--green); }
+#s2 .agenda-item:nth-child(4) .a-num { background: var(--gold); }
+#s2 .agenda-item:nth-child(5) .a-num { background: var(--red); }
+#s2 .agenda-item:nth-child(6) .a-num { background: var(--orange); }
+#s2 .agenda-item:nth-child(7) .a-num { background: var(--blue); }
+#s2 .a-title { font-weight: 600; font-size: 14px; color: var(--dark); margin-bottom: 3px; }
+#s2 .a-sub   { font-size: 12px; color: var(--gray); }
+
+/* ============================================
+   SHARED SLIDE LAYOUT
+   ============================================ */
+.s-header {
+  padding: 28px 60px 22px;
+  position: relative;
+}
+.s-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--lime), var(--gold));
+}
+.s-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--lime);
+  margin-bottom: 4px;
+}
+.s-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--white);
+}
+.s-body {
+  padding: 28px 60px 80px;
+  height: calc(100% - 110px);
+  overflow: auto;
+}
+
+/* ============================================
+   SLIDE 3 — GAMBARAN UMUM
+   ============================================ */
+#s3 { background: var(--white); }
+#s3 .s-header { background: var(--forest); }
+#s3 .stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+#s3 .stat-card {
+  border-radius: 10px;
+  padding: 22px 18px;
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+#s3 .stat-card::before {
+  content: '';
+  position: absolute;
+  top: -20px; right: -20px;
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+}
+#s3 .stat-card .sv { font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 900; }
+#s3 .stat-card .sl { font-size: 12px; opacity: 0.85; margin-top: 4px; letter-spacing: 1px; }
+#s3 .sc1 { background: var(--forest); }
+#s3 .sc2 { background: var(--teal); }
+#s3 .sc3 { background: var(--green); }
+#s3 .sc4 { background: linear-gradient(135deg, var(--gold), var(--amber)); }
+#s3 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+#s3 .panel { background: var(--xlight); border-radius: 10px; padding: 20px; }
+#s3 .panel h3 { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px; color: var(--forest); margin-bottom: 14px; text-transform: uppercase; }
+#s3 .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+#s3 .bar-label { font-size: 12px; color: var(--charcoal); width: 160px; flex-shrink: 0; }
+#s3 .bar-track { flex: 1; height: 10px; background: #ddd; border-radius: 5px; overflow: hidden; }
+#s3 .bar-fill { height: 100%; border-radius: 5px; transition: width 1s ease; }
+#s3 .bar-pct { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--gray); width: 40px; text-align: right; }
+#s3 .suku-list { display: flex; flex-direction: column; gap: 8px; }
+#s3 .suku-row { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: white; border-radius: 6px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+#s3 .suku-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--forest); flex-shrink: 0; }
+#s3 .suku-name { font-weight: 600; font-size: 13px; flex: 1; }
+#s3 .suku-n { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--gray); }
+#s3 .suku-tag { background: var(--gold); color: white; font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 2px; letter-spacing: 1px; }
+
+/* ============================================
+   SLIDE 4 — SECTION DIVIDER: PROGRAM KERJA
+   ============================================ */
+#s4 {
+  background: var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#s4 .bg-mesh {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 0% 50%, rgba(0,105,92,0.5) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 50% at 100% 0%, rgba(27,94,32,0.6) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 100% 100%, rgba(249,168,37,0.15) 0%, transparent 60%);
+}
+#s4 .grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(102,187,106,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(102,187,106,0.05) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+#s4 .gold-bar { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--green), var(--gold), var(--teal)); }
+#s4 .content { position: relative; z-index: 2; text-align: center; animation: fadeUp 0.8s ease both; }
+#s4 .eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 6px;
+  color: var(--lime);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+#s4 h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(48px, 7vw, 80px);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+#s4 h2 em { color: var(--gold); font-style: normal; }
+#s4 .desc { font-size: 16px; color: rgba(255,255,255,0.5); max-width: 600px; margin: 0 auto 40px; }
+#s4 .badge-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+#s4 .badge {
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+#s4 .badge.b1 { background: var(--forest); color: var(--lime); border: 1px solid var(--lime); }
+#s4 .badge.b2 { background: var(--teal); color: #80CBC4; border: 1px solid #80CBC4; }
+#s4 .badge.b3 { background: rgba(198,40,40,0.3); color: #EF9A9A; border: 1px solid #EF9A9A; }
+#s4 .badge.b4 { background: rgba(1,87,155,0.3); color: #90CAF9; border: 1px solid #90CAF9; }
+
+/* ============================================
+   SLIDE 5 — PROGRAM: LINGKUNGAN (Kompos & RTH)
+   ============================================ */
+#s5 { background: #F1F8E9; }
+#s5 .s-header { background: var(--forest); }
+#s5 .prog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+#s5 .prog-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+#s5 .prog-card-header {
+  background: var(--forest);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+#s5 .prog-card-header .icon {
+  width: 40px; height: 40px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+#s5 .prog-card-header h3 { color: white; font-size: 15px; font-weight: 700; }
+#s5 .prog-card-header .date { color: var(--light); font-size: 11px; font-family: 'Space Mono', monospace; }
+#s5 .prog-card-body { padding: 18px 20px; }
+#s5 .prog-stat-row { display: flex; gap: 12px; margin-bottom: 14px; }
+#s5 .prog-stat { flex: 1; text-align: center; background: var(--xlight); border-radius: 8px; padding: 12px 8px; }
+#s5 .prog-stat .pv { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--forest); }
+#s5 .prog-stat .pl { font-size: 10px; color: var(--gray); margin-top: 2px; }
+#s5 .result-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+#s5 .result-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: var(--charcoal); line-height: 1.4; }
+#s5 .result-list li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+#s5 .budget-tag { display: inline-block; background: var(--xlight); border: 1px solid var(--light); color: var(--forest); font-family: 'Space Mono', monospace; font-size: 11px; padding: 4px 10px; border-radius: 4px; margin-top: 12px; }
+#s5 .prog-card.rth .prog-card-header { background: var(--teal); }
+#s5 .prog-card.rth .prog-stat .pv { color: var(--teal); }
+
+/* ============================================
+   SLIDE 6 — PROGRAM: EKONOMI
+   ============================================ */
+#s6 { background: #FFF8E1; }
+#s6 .s-header { background: linear-gradient(90deg, #5D4037, #795548); }
+#s6 .eco-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+#s6 .eco-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+#s6 .eco-card-h {
+  padding: 16px 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+#s6 .eco-card.umk .eco-card-h { background: #795548; }
+#s6 .eco-card.rajut .eco-card-h { background: linear-gradient(90deg, #AD1457, #C2185B); }
+#s6 .eco-card-h .icon { font-size: 24px; }
+#s6 .eco-card-h h3 { color: white; font-size: 15px; font-weight: 700; }
+#s6 .eco-card-h .date { color: rgba(255,255,255,0.7); font-size: 11px; font-family: 'Space Mono', monospace; }
+#s6 .eco-card-body { padding: 18px 20px; }
+#s6 .highlight-box {
+  background: #FFF8E1;
+  border-left: 4px solid var(--gold);
+  padding: 12px 14px;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 14px;
+}
+#s6 .highlight-box .hv { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: #5D4037; }
+#s6 .highlight-box .hl { font-size: 11px; color: var(--gray); }
+#s6 .qris-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
+#s6 .qris-item { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+#s6 .qris-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+#s6 .result-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+#s6 .result-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: var(--charcoal); line-height: 1.4; }
+#s6 .result-list li::before { content: '✓'; color: #AD1457; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+#s6 .budget-tag { display: inline-block; background: #FFF8E1; border: 1px solid #FFCC02; color: #5D4037; font-family: 'Space Mono', monospace; font-size: 11px; padding: 4px 10px; border-radius: 4px; margin-top: 10px; }
+#s6 .prog-stat-row { display: flex; gap: 12px; margin-bottom: 14px; }
+#s6 .prog-stat { flex: 1; text-align: center; background: #FFF8E1; border-radius: 8px; padding: 12px 8px; }
+#s6 .prog-stat .pv { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: #795548; }
+#s6 .prog-stat .pl { font-size: 10px; color: var(--gray); margin-top: 2px; }
+#s6 .eco-card.rajut .prog-stat .pv { color: #AD1457; }
+#s6 .eco-card.rajut .highlight-box { background: #FCE4EC; border-color: #AD1457; }
+#s6 .eco-card.rajut .highlight-box .hv { color: #AD1457; }
+
+/* ============================================
+   SLIDE 7 — PROGRAM: KESEHATAN
+   ============================================ */
+#s7 { background: #E3F2FD; }
+#s7 .s-header { background: var(--blue); }
+#s7 .kes-layout { display: grid; grid-template-columns: 1.3fr 1fr; gap: 24px; }
+#s7 .kes-main {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+#s7 .kes-main-h { background: var(--blue); padding: 18px 22px; }
+#s7 .kes-main-h h3 { color: white; font-size: 16px; font-weight: 700; }
+#s7 .kes-main-h .sub { color: rgba(255,255,255,0.75); font-size: 12px; font-family: 'Space Mono', monospace; margin-top: 4px; }
+#s7 .kes-main-body { padding: 20px 22px; }
+#s7 .score-comparison {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #E3F2FD;
+  border-radius: 10px;
+  padding: 18px;
+  margin-bottom: 18px;
+}
+#s7 .score-box { flex: 1; text-align: center; }
+#s7 .score-box .sv { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 900; }
+#s7 .score-box.pre .sv { color: var(--gray); }
+#s7 .score-box.post .sv { color: var(--blue); }
+#s7 .score-box .sl { font-size: 11px; color: var(--gray); font-family: 'Space Mono', monospace; letter-spacing: 1px; text-transform: uppercase; }
+#s7 .arrow-box { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+#s7 .arrow-box .delta { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #2E7D32; }
+#s7 .arrow-box .arrow { font-size: 28px; color: #2E7D32; }
+#s7 .target-bar { background: #E8F5E9; border-radius: 8px; padding: 12px 14px; display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+#s7 .target-bar .check { color: #2E7D32; font-size: 18px; }
+#s7 .target-bar .text { font-size: 12.5px; color: var(--charcoal); }
+#s7 .target-bar .text strong { color: #2E7D32; }
+#s7 .kes-side { display: flex; flex-direction: column; gap: 16px; }
+#s7 .topic-card { background: white; border-radius: 10px; padding: 16px 18px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); border-top: 3px solid var(--blue); }
+#s7 .topic-card h4 { font-size: 13px; font-weight: 700; color: var(--blue); margin-bottom: 8px; }
+#s7 .topic-list { font-size: 12px; color: var(--charcoal); display: flex; flex-direction: column; gap: 4px; }
+#s7 .topic-list li { list-style: none; display: flex; gap: 6px; align-items: flex-start; }
+#s7 .topic-list li::before { content: '→'; color: var(--blue); flex-shrink: 0; }
+#s7 .stat-pills { display: flex; gap: 10px; flex-wrap: wrap; }
+#s7 .pill { padding: 8px 14px; border-radius: 50px; font-size: 12px; font-weight: 600; }
+#s7 .pill.p1 { background: #E3F2FD; color: var(--blue); }
+#s7 .pill.p2 { background: #E8F5E9; color: var(--forest); }
+
+/* ============================================
+   SLIDE 8 — PROGRAM: PENDIDIKAN
+   ============================================ */
+#s8 { background: #F3E5F5; }
+#s8 .s-header { background: #6A1B9A; }
+#s8 .edu-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+#s8 .edu-main { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+#s8 .edu-main-h { background: #6A1B9A; padding: 16px 22px; }
+#s8 .edu-main-h h3 { color: white; font-size: 15px; font-weight: 700; }
+#s8 .edu-main-h .sub { color: rgba(255,255,255,0.7); font-size: 11px; font-family: 'Space Mono', monospace; margin-top: 3px; }
+#s8 .edu-main-body { padding: 18px 22px; }
+#s8 .test-row { display: flex; gap: 12px; margin-bottom: 16px; }
+#s8 .test-box { flex: 1; border-radius: 8px; padding: 14px; text-align: center; }
+#s8 .test-box.pre  { background: #EDE7F6; }
+#s8 .test-box.post { background: #6A1B9A; }
+#s8 .test-box .tv { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; }
+#s8 .test-box.pre  .tv { color: #6A1B9A; }
+#s8 .test-box.post .tv { color: white; }
+#s8 .test-box .tl { font-size: 10px; font-family: 'Space Mono', monospace; letter-spacing: 1px; }
+#s8 .test-box.pre  .tl { color: var(--gray); }
+#s8 .test-box.post .tl { color: rgba(255,255,255,0.7); }
+#s8 .method-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+#s8 .method-item { background: #F3E5F5; border-radius: 6px; padding: 8px 10px; font-size: 11.5px; color: #4A148C; display: flex; align-items: center; gap: 6px; }
+#s8 .method-item .mi { font-size: 14px; }
+#s8 .bullying-types { display: flex; flex-direction: column; gap: 8px; }
+#s8 .btype { display: flex; align-items: center; gap: 10px; background: white; border-radius: 8px; padding: 10px 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 3px solid #6A1B9A; }
+#s8 .btype .bi { font-size: 18px; }
+#s8 .btype .bn { font-weight: 600; font-size: 13px; color: var(--dark); }
+#s8 .btype .bd { font-size: 11px; color: var(--gray); }
+#s8 .result-card { background: white; border-radius: 10px; padding: 16px 18px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); margin-top: 0; }
+#s8 .result-card h4 { font-size: 12px; font-weight: 700; color: #6A1B9A; margin-bottom: 10px; font-family: 'Space Mono', monospace; letter-spacing: 2px; text-transform: uppercase; }
+#s8 .result-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+#s8 .r-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+/* ============================================
+   SLIDE 9 — CAPAIAN KESELURUHAN
+   ============================================ */
+#s9 { background: var(--dark); }
+#s9 .bg-mesh {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 50% 60% at 80% 20%, rgba(27,94,32,0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,105,92,0.3) 0%, transparent 60%);
+}
+#s9 .s-header { background: transparent; padding-bottom: 16px; }
+#s9 .s-header::after { background: linear-gradient(90deg, var(--gold), var(--lime), transparent); }
+#s9 .s-num { color: var(--lime); }
+#s9 .s-title { color: var(--white); font-size: 36px; }
+#s9 .cap-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+#s9 .cap-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 20px 16px;
+  text-align: center;
+  backdrop-filter: blur(4px);
+  transition: transform 0.2s;
+}
+#s9 .cap-card:hover { transform: translateY(-3px); background: rgba(255,255,255,0.1); }
+#s9 .cap-card .icon { font-size: 28px; margin-bottom: 10px; }
+#s9 .cap-card .cv { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 900; color: var(--gold); }
+#s9 .cap-card .cl { font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 4px; }
+#s9 .success-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+#s9 .suc-card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  padding: 16px 18px;
+  border-top: 3px solid var(--gold);
+}
+#s9 .suc-card.sc-env { border-color: var(--lime); }
+#s9 .suc-card.sc-eco { border-color: var(--gold); }
+#s9 .suc-card.sc-hlt { border-color: #64B5F6; }
+#s9 .suc-card.sc-edu { border-color: #CE93D8; }
+#s9 .suc-card h4 { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.9); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+#s9 .suc-card ul { font-size: 11.5px; color: rgba(255,255,255,0.6); display: flex; flex-direction: column; gap: 4px; }
+#s9 .suc-card ul li { list-style: none; display: flex; gap: 6px; align-items: flex-start; }
+#s9 .suc-card ul li::before { content: '▸'; opacity: 0.6; flex-shrink: 0; }
+#s9 .all-100 {
+  background: linear-gradient(90deg, rgba(249,168,37,0.15), rgba(249,168,37,0.05));
+  border: 1px solid rgba(249,168,37,0.3);
+  border-radius: 10px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+#s9 .all-100 .big { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 900; color: var(--gold); flex-shrink: 0; }
+#s9 .all-100 .text h4 { font-size: 16px; font-weight: 700; color: white; margin-bottom: 4px; }
+#s9 .all-100 .text p { font-size: 12px; color: rgba(255,255,255,0.55); }
+
+/* ============================================
+   SLIDE 10 — PENUTUP
+   ============================================ */
+#s10 {
+  background: var(--forest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#s10 .bg-mesh {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,0,0,0.3) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 90% 10%, rgba(249,168,37,0.2) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 10% 90%, rgba(0,105,92,0.4) 0%, transparent 60%);
+}
+#s10 .grid-lines {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+#s10 .gold-bar { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--gold), var(--amber), var(--gold)); }
+#s10 .content { position: relative; z-index: 2; text-align: center; max-width: 700px; padding: 0 40px; animation: fadeUp 0.8s ease both; }
+#s10 .eyebrow { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 5px; color: var(--lime); margin-bottom: 20px; text-transform: uppercase; }
+#s10 h2 { font-family: 'Playfair Display', serif; font-size: clamp(40px, 6vw, 64px); font-weight: 900; color: white; line-height: 1.1; margin-bottom: 20px; }
+#s10 h2 em { color: var(--gold); font-style: normal; }
+#s10 .divider { width: 60px; height: 2px; background: var(--gold); margin: 0 auto 24px; }
+#s10 .thanks { font-size: 16px; color: rgba(255,255,255,0.65); margin-bottom: 36px; line-height: 1.6; }
+#s10 .footer-info { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+#s10 .fi { text-align: center; }
+#s10 .fi .fv { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--gold); font-weight: 700; }
+#s10 .fi .fl { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 3px; }
+
+/* ============================================
+   KEYBOARD HINT
+   ============================================ */
+.key-hint {
+  position: fixed;
+  bottom: 72px;
+  right: 24px;
+  font-size: 10px;
+  color: rgba(255,255,255,0.3);
+  font-family: 'Space Mono', monospace;
+  z-index: 999;
+}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- ============ SLIDE 1 – COVER ============ -->
+  <div class="slide active" id="s1">
+    <div class="bg-mesh"></div>
+    <div class="noise"></div>
+    <div class="grid-lines"></div>
+    <div class="gold-bar-top"></div>
+    <div class="gold-bar-bottom"></div>
+    <div class="cover-content">
+      <div class="tag">KKN UNIVERSITAS LAMPUNG · 2026</div>
+      <h1>Laporan Akhir<br/><span>Program Kerja KKN</span></h1>
+      <p class="subtitle">KELURAHAN WAY LUNIK</p>
+      <div class="divider"></div>
+      <div class="info-row">
+        <div class="info-item"><div class="val">13</div><div class="lbl">Mahasiswa</div></div>
+        <div class="info-item"><div class="val">6</div><div class="lbl">Program Kerja</div></div>
+        <div class="info-item"><div class="val">4</div><div class="lbl">Bidang Fokus</div></div>
+        <div class="info-item"><div class="val">31</div><div class="lbl">Hari KKN</div></div>
+      </div>
+      <p class="location">📍 <strong>Lingkungan II, Kec. Panjang, Bandar Lampung</strong> &nbsp;·&nbsp; 09 Jan – 08 Feb 2026</p>
+    </div>
+  </div>
+
+  <!-- ============ SLIDE 2 – AGENDA ============ -->
+  <div class="slide" id="s2">
+    <div class="s-header" style="background:var(--forest)">
+      <div class="s-num">00 · AGENDA</div>
+      <div class="s-title">Isi Presentasi</div>
+    </div>
+    <div class="agenda-grid">
+      <div class="agenda-item">
+        <div class="a-num">01</div>
+        <div><div class="a-title">Pendahuluan & Latar Belakang</div><div class="a-sub">Konteks, tujuan, dan tim KKN</div></div>
+      </div>
+      <div class="agenda-item">
+        <div class="a-num">02</div>
+        <div><div class="a-title">Gambaran Umum Kelurahan</div><div class="a-sub">Kondisi geografis & demografis</div></div>
+      </div>
+      <div class="agenda-item">
+        <div class="a-num">03</div>
+        <div><div class="a-title">Program Kerja: Lingkungan</div><div class="a-sub">Kompos, Eco-Enzyme & Revitalisasi RTH</div></div>
+      </div>
+      <div class="agenda-item">
+        <div class="a-num">04</div>
+        <div><div class="a-title">Program Kerja: Ekonomi</div><div class="a-sub">Pendataan UMK, QRIS & Rajut Tas</div></div>
+      </div>
+      <div class="agenda-item">
+        <div class="a-num">05</div>
+        <div><div class="a-title">Program Kerja: Kesehatan</div><div class="a-sub">Kelas EMAS – ASI, MPASI & Stimulasi</div></div>
+      </div>
+      <div class="agenda-item">
+        <div class="a-num">06</div>
+        <div><div class="a-title">Program Kerja: Pendidikan</div><div class="a-sub">Sosialisasi Anti-Perundungan</div></div>
+      </div>
+      <div class="agenda-item">
+        <div class="a-num">07</div>
+        <div><div class="a-title">Capaian & Kesimpulan</div><div class="a-sub">Hasil dan rekomendasi tindak lanjut</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SLIDE 3 – PENDAHULUAN ============ -->
+  <div class="slide" id="s3" style="background:white">
+    <div class="s-header" style="background:var(--forest)">
+      <div class="s-num">01 · PENDAHULUAN</div>
+      <div class="s-title">Gambaran Umum Kelurahan Way Lunik</div>
+    </div>
+    <div class="s-body">
+      <div class="stats-row">
+        <div class="stat-card sc1"><div class="sv">7.518</div><div class="sl">Total Penduduk</div></div>
+        <div class="stat-card sc2"><div class="sv">144 Ha</div><div class="sl">Luas Wilayah</div></div>
+        <div class="stat-card sc3"><div class="sv">35 RT</div><div class="sl">2 Lingkungan</div></div>
+        <div class="stat-card sc4"><div class="sv">94,3%</div><div class="sl">Penduduk Muslim</div></div>
+      </div>
+      <div class="two-col">
+        <div class="panel">
+          <h3>Komposisi Usia Penduduk</h3>
+          <div class="bar-row"><span class="bar-label">Usia Produktif (18–60 thn)</span><div class="bar-track"><div class="bar-fill" style="width:53.7%;background:var(--forest)"></div></div><span class="bar-pct">53,7%</span></div>
+          <div class="bar-row"><span class="bar-label">Usia SD (0–12 thn)</span><div class="bar-track"><div class="bar-fill" style="width:21.4%;background:var(--lime)"></div></div><span class="bar-pct">21,4%</span></div>
+          <div class="bar-row"><span class="bar-label">Usia SMP (13–15 thn)</span><div class="bar-track"><div class="bar-fill" style="width:14.8%;background:var(--teal)"></div></div><span class="bar-pct">14,8%</span></div>
+          <div class="bar-row"><span class="bar-label">Usia SMA (16–17 thn)</span><div class="bar-track"><div class="bar-fill" style="width:13.8%;background:var(--gold)"></div></div><span class="bar-pct">13,8%</span></div>
+          <div class="bar-row"><span class="bar-label">Lansia (60+ thn)</span><div class="bar-track"><div class="bar-fill" style="width:3.8%;background:var(--orange)"></div></div><span class="bar-pct">3,8%</span></div>
+        </div>
+        <div class="panel">
+          <h3>Keragaman Suku</h3>
+          <div class="suku-list">
+            <div class="suku-row"><div class="suku-dot" style="background:var(--forest)"></div><span class="suku-name">Jawa</span><span class="suku-n">964 jiwa</span><span class="suku-tag">MAYORITAS</span></div>
+            <div class="suku-row"><div class="suku-dot" style="background:var(--teal)"></div><span class="suku-name">Sunda</span><span class="suku-n">705 jiwa</span></div>
+            <div class="suku-row"><div class="suku-dot" style="background:var(--gray)"></div><span class="suku-name">Batak</span><span class="suku-n">257 jiwa</span></div>
+            <div class="suku-row"><div class="suku-dot" style="background:var(--gold)"></div><span class="suku-name">Lampung</span><span class="suku-n">140 jiwa</span><span class="suku-tag" style="background:var(--forest)">SUKU ASLI</span></div>
+            <div class="suku-row"><div class="suku-dot" style="background:var(--orange)"></div><span class="suku-name">Bali</span><span class="suku-n">12 jiwa</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SLIDE 4 – SECTION DIVIDER ============ -->
+  <div class="slide" id="s4">
+    <div class="bg-mesh"></div>
+    <div class="grid-lines"></div>
+    <div class="gold-bar"></div>
+    <div class="content">
+      <div class="eyebrow">Hasil Pelaksanaan</div>
+      <h2>Program<br/><em>Kerja KKN</em></h2>
+      <p class="desc">6 program kerja lintas bidang yang terlaksana penuh selama 31 hari di Kelurahan Way Lunik</p>
+      <div class="badge-row">
+        <div class="badge b1">🌿 Lingkungan</div>
+        <div class="badge b2">💼 Ekonomi</div>
+        <div class="badge b3">❤️ Kesehatan</div>
+        <div class="badge b4">📚 Pendidikan</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SLIDE 5 – LINGKUNGAN ============ -->
+  <div class="slide" id="s5">
+    <div class="s-header" style="background:var(--forest)">
+      <div class="s-num">02 · BIDANG LINGKUNGAN</div>
+      <div class="s-title">Kompos, Eco-Enzyme & Revitalisasi RTH</div>
+    </div>
+    <div class="s-body" style="padding-top:20px">
+      <div class="prog-grid">
+        <div class="prog-card">
+          <div class="prog-card-header">
+            <div class="icon">🌿</div>
+            <div>
+              <h3>Pelatihan Kompos & Eco-Enzyme</h3>
+              <div class="date">17 Januari 2026 · PJ: Akbar & Elga</div>
+            </div>
+          </div>
+          <div class="prog-card-body">
+            <div class="prog-stat-row">
+              <div class="prog-stat"><div class="pv">24</div><div class="pl">Peserta Aktif</div></div>
+              <div class="prog-stat"><div class="pv">2 Jam</div><div class="pl">Jam Kerja</div></div>
+              <div class="prog-stat"><div class="pv">100%</div><div class="pl">Keberhasilan</div></div>
+            </div>
+            <ul class="result-list">
+              <li>Demonstrasi kompos metode layering (berlapis)</li>
+              <li>Praktik eco-enzyme: molase:kulit buah:air = 1:3:10</li>
+              <li>65% peserta sebelumnya belum pernah mengolah sampah organik</li>
+              <li>Terpicu inisiasi pembentukan kelompok pengolah sampah Lingkungan II</li>
+              <li>Setiap peserta membawa pulang botol eco-enzyme buatan sendiri</li>
+            </ul>
+            <div class="budget-tag">💰 Biaya: Rp 70.000</div>
+          </div>
+        </div>
+        <div class="prog-card rth">
+          <div class="prog-card-header" style="background:var(--teal)">
+            <div class="icon">🌳</div>
+            <div>
+              <h3>Revitalisasi RTH & Edukasi Lingkungan</h3>
+              <div class="date">18–29 Januari 2026 · PJ: Ramadani & Raditiya</div>
+            </div>
+          </div>
+          <div class="prog-card-body">
+            <div class="prog-stat-row">
+              <div class="prog-stat" style="background:#E0F2F1"><div class="pv" style="color:var(--teal)">70</div><div class="pl">Tanaman TOGA</div></div>
+              <div class="prog-stat" style="background:#E0F2F1"><div class="pv" style="color:var(--teal)">102 Jam</div><div class="pl">Jam Kerja</div></div>
+              <div class="prog-stat" style="background:#E0F2F1"><div class="pv" style="color:var(--teal)">~20</div><div class="pl">Warga Aktif</div></div>
+            </div>
+            <ul class="result-list">
+              <li>Penanaman 70 Tanaman Obat Keluarga (TOGA)</li>
+              <li>Instalasi sistem hidroponik pipa PVC (kangkung, selada, sawi)</li>
+              <li>Pembangunan gapura bambu dengan tanaman rambat</li>
+              <li>Mural edukatif 3×2 meter tentang fungsi RTH</li>
+              <li>Peningkatan komitmen warga menjaga RTH secara gotong royong</li>
+            </ul>
+            <div class="budget-tag" style="border-color:var(--light);color:var(--teal)">💰 Biaya: Rp 486.400</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SLIDE 6 – EKONOMI ============ -->
+  <div class="slide" id="s6">
+    <div class="s-header" style="background:linear-gradient(90deg,#5D4037,#795548)">
+      <div class="s-num">03 · BIDANG EKONOMI</div>
+      <div class="s-title">Pendataan UMK, QRIS & Pelatihan Rajut Tas</div>
+    </div>
+    <div class="s-body" style="padding-top:20px">
+      <div class="eco-grid">
+        <div class="eco-card umk">
+          <div class="eco-card-h">
+            <div class="icon">📊</div>
+            <div>
+              <h3>Pendataan & Identifikasi Potensi UMK</h3>
+              <div class="date">13–15 Januari 2026 · PJ: Marchsya, Nuzha, Tasya</div>
+            </div>
+          </div>
+          <div class="eco-card-body">
+            <div class="prog-stat-row">
+              <div class="prog-stat"><div class="pv">28 Jam</div><div class="pl">Jam Kerja</div></div>
+              <div class="prog-stat"><div class="pv">5</div><div class="pl">QRIS Dibuat</div></div>
+            </div>
+            <div class="highlight-box">
+              <div class="hv">Database UMK Lengkap</div>
+              <div class="hl">Profil, jenis usaha, omzet, hambatan — terstruktur digital</div>
+            </div>
+            <p style="font-size:12px;font-weight:700;color:#5D4037;margin-bottom:6px">5 Pelaku Usaha Berhasil Aktivasi QRIS:</p>
+            <div class="qris-list">
+              <div class="qris-item"><div class="qris-dot"></div><span><strong>Dea</strong> — Warung/Kelontong</span></div>
+              <div class="qris-item"><div class="qris-dot"></div><span><strong>Billis</strong> — Makanan/Minuman</span></div>
+              <div class="qris-item"><div class="qris-dot"></div><span><strong>Eriyanti</strong> — Makanan/Minuman</span></div>
+              <div class="qris-item"><div class="qris-dot"></div><span><strong>Mattohiri</strong> — Makanan/Minuman</span></div>
+              <div class="qris-item"><div class="qris-dot"></div><span><strong>Tia</strong> — Jasa</span></div>
+            </div>
+            <div class="budget-tag">💰 Biaya: Rp 100.000</div>
+          </div>
+        </div>
+        <div class="eco-card rajut">
+          <div class="eco-card-h">
+            <div class="icon">🧶</div>
+            <div>
+              <h3>Pelatihan Pembuatan Rajut Tas</h3>
+              <div class="date">4 Februari 2026 · PJ: Shanny Ngep</div>
+            </div>
+          </div>
+          <div class="eco-card-body">
+            <div class="prog-stat-row">
+              <div class="prog-stat" style="background:#FCE4EC"><div class="pv" style="color:#AD1457">57</div><div class="pl">Peserta (Target: 20)</div></div>
+              <div class="prog-stat" style="background:#FCE4EC"><div class="pv" style="color:#AD1457">2 Jam</div><div class="pl">Jam Kerja</div></div>
+            </div>
+            <div class="highlight-box">
+              <div class="hv">Kelompok "Rajut Berkah"</div>
+              <div class="hl">Terbentuk untuk terus berlatih dan kembangkan usaha bersama</div>
+            </div>
+            <ul class="result-list">
+              <li>Teknik: tusuk rantai, tusuk tunggal, tusuk ganda</li>
+              <li>Setiap peserta mendapat starter kit (benang + hakpen)</li>
+              <li>2 produk tas rajut sampel berkualitas tinggi berhasil dibuat</li>
+              <li>57 peserta — hampir 3× lipat target; antusiasme luar biasa</li>
+            </ul>
+            <div class="budget-tag" style="background:#FCE4EC;border-color:#F48FB1;color:#AD1457">💰 Biaya: Rp 110.000</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SLIDE 7 – KESEHATAN ============ -->
+  <div class="slide" id="s7">
+    <div class="s-header" style="background:var(--blue)">
+      <div class="s-num">04 · BIDANG KESEHATAN</div>
+      <div class="s-title">Kelas EMAS — Edukasi Ibu Hamil & Menyusui</div>
+    </div>
+    <div class="s-body" style="padding-top:20px">
+      <div class="kes-layout">
+        <div class="kes-main">
+          <div class="kes-main-h">
+            <h3>Kelas EMAS: ASI Eksklusif, MPASI & Stimulasi Dini</h3>
+            <div class="sub">22 Januari 2026 · Posyandu Mawar Jingga · PJ: Kezia & Fadillah</div>
+          </div>
+          <div class="kes-main-body">
+            <div class="score-comparison">
+              <div class="score-box pre">
+                <div class="sv">66,3</div>
+                <div class="sl">Pre-Test</div>
+              </div>
+              <div class="arrow-box">
+                <div class="delta">+32,2%</div>
+                <div class="arrow">→</div>
+              </div>
+              <div class="score-box post">
+                <div class="sv">97,8</div>
+                <div class="sl">Post-Test</div>
+              </div>
+            </div>
+            <div class="target-bar">
+              <div class="check">✅</div>
+              <div class="text">Melampaui target peningkatan <strong>30%</strong> — tercapai <strong>32,2%</strong>! Lebih dari 80% peserta memahami manfaat ASI & MPASI.</div>
+            </div>
+            <div class="target-bar" style="background:#E3F2FD;border-left:4px solid var(--blue)">
+              <div class="check" style="color:var(--blue)">👥</div>
+              <div class="text">18 peserta aktif ibu hamil & menyusui — <strong>melampaui target 15 peserta</strong>. Kolaborasi bidan Puskesmas setempat.</div>
+            </div>
+          </div>
+        </div>
+        <div class="kes-side">
+          <div class="topic-card">
+            <h4>🤱 ASI Eksklusif</h4>
+            <ul class="topic-list">
+              <li>Manfaat ASI 6 bulan pertama kehidupan bayi</li>
+              <li>Teknik menyusui yang benar</li>
+              <li>Mengatasi kendala (puting lecet, produksi kurang)</li>
+            </ul>
+          </div>
+          <div class="topic-card" style="border-color:#2E7D32">
+            <h4 style="color:#2E7D32">🥦 MPASI</h4>
+            <ul class="topic-list" style="">
+              <li>Waktu pemberian tepat: usia 6 bulan</li>
+              <li>Demo MPASI: pisang, ubi, labu, hati ayam, sayuran</li>
+              <li>Tekstur & porsi sesuai tahapan usia</li>
+            </ul>
+          </div>
+          <div class="topic-card" style="border-color:var(--gold)">
+            <h4 style="color:#E65100">👶 Stimulasi Dini (0–2 tahun)</h4>
+            <ul class="topic-list">
+              <li>Motorik kasar & halus</li>
+              <li>Perkembangan bahasa</li>
+              <li>Sosial-emosional anak</li>
+            </ul>
+          </div>
+          <div class="stat-pills">
+            <div class="pill p1">4 Jam Kegiatan</div>
+            <div class="pill p2">💰 Rp 249.000</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SLIDE 8 – PENDIDIKAN ============ -->
+  <div class="slide" id="s8">
+    <div class="s-header" style="background:#6A1B9A">
+      <div class="s-num">05 · BIDANG PENDIDIKAN</div>
+      <div class="s-title">Sosialisasi Pencegahan & Penanganan Perundungan</div>
+    </div>
+    <div class="s-body" style="padding-top:20px">
+      <div class="edu-layout">
+        <div class="edu-main">
+          <div class="edu-main-h">
+            <h3>Anti-Bullying — SDN 1 Way Lunik, Kelas 5</h3>
+            <div class="sub">23 Januari 2026 · PJ: Erlin, Widia, Reggina</div>
+          </div>
+          <div class="edu-main-body">
+            <div class="test-row">
+              <div class="test-box pre">
+                <div class="tv">26/35</div>
+                <div class="tl">Pre-Test Nilai 100</div>
+              </div>
+              <div class="test-box post">
+                <div class="tv">35/35</div>
+                <div class="tl">Post-Test ≥ 80</div>
+              </div>
+            </div>
+            <p style="font-size:12px;font-weight:700;color:#6A1B9A;margin-bottom:8px;font-family:'Space Mono',monospace;letter-spacing:1px;text-transform:uppercase">Metode Pembelajaran</p>
+            <div class="method-grid">
+              <div class="method-item"><span class="mi">📋</span> Pre-test & Post-test</div>
+              <div class="method-item"><span class="mi">🎭</span> Role Play Simulasi</div>
+              <div class="method-item"><span class="mi">🎬</span> Video Edukatif</div>
+              <div class="method-item"><span class="mi">💬</span> Diskusi Interaktif</div>
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">
+              <span style="background:#EDE7F6;color:#6A1B9A;font-size:11px;font-weight:600;padding:5px 12px;border-radius:50px">35 Peserta (Target: 15)</span>
+              <span style="background:#E8F5E9;color:#2E7D32;font-size:11px;font-weight:600;padding:5px 12px;border-radius:50px">✓ 100% Berhasil</span>
+              <span style="background:#FFF8E1;color:#E65100;font-size:11px;font-weight:600;padding:5px 12px;border-radius:50px">💰 Rp 166.000</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <p style="font-size:12px;font-weight:700;color:#6A1B9A;font-family:'Space Mono',monospace;letter-spacing:2px;text-transform:uppercase">Jenis Perundungan yang Diajarkan</p>
+          <div class="bullying-types">
+            <div class="btype"><span class="bi">👊</span><div><div class="bn">Fisik</div><div class="bd">Memukul, mendorong, merusak barang</div></div></div>
+            <div class="btype"><span class="bi">🗣️</span><div><div class="bn">Verbal</div><div class="bd">Mengejek, menghina, mengancam</div></div></div>
+            <div class="btype"><span class="bi">😔</span><div><div class="bn">Psikologis</div><div class="bd">Mengucilkan, mempermalukan, mengabaikan</div></div></div>
+            <div class="btype"><span class="bi">💻</span><div><div class="bn">Cyber Bullying</div><div class="bd">Pelecehan via media sosial & pesan digital</div></div></div>
+          </div>
+          <div class="result-card">
+            <h4>Capaian Utama</h4>
+            <div class="result-row"><div class="r-dot" style="background:#6A1B9A"></div><span style="font-size:12px">Siswa memahami peran sebagai <strong>upstander</strong>, bukan bystander</span></div>
+            <div class="result-row"><div class="r-dot" style="background:#6A1B9A"></div><span style="font-size:12px">Mengetahui mekanisme lapor ke guru BK & kepala sekolah</span></div>
+            <div class="result-row"><div class="r-dot" style="background:#6A1B9A"></div><span style="font-size:12px">Berkomitmen menciptakan lingkungan sekolah yang aman</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SLIDE 9 – CAPAIAN ============ -->
+  <div class="slide" id="s9">
+    <div class="bg-mesh"></div>
+    <div style="position:relative;z-index:2;height:100%;display:flex;flex-direction:column">
+      <div class="s-header" style="background:transparent;padding:28px 60px 16px">
+        <div class="s-num">06 · CAPAIAN & KESIMPULAN</div>
+        <div class="s-title" style="color:white">Ringkasan Hasil Program Kerja KKN</div>
+      </div>
+      <div style="padding:16px 60px 80px;overflow:auto">
+        <div class="cap-grid">
+          <div class="cap-card"><div class="icon">🌿</div><div class="cv">2</div><div class="cl">Program Lingkungan</div></div>
+          <div class="cap-card"><div class="icon">💼</div><div class="cv">2</div><div class="cl">Program Ekonomi</div></div>
+          <div class="cap-card"><div class="icon">❤️</div><div class="cv">1</div><div class="cl">Program Kesehatan</div></div>
+          <div class="cap-card"><div class="icon">📚</div><div class="cv">1</div><div class="cl">Program Pendidikan</div></div>
+        </div>
+        <div class="success-row">
+          <div class="suc-card sc-env">
+            <h4>🌿 Lingkungan</h4>
+            <ul>
+              <li>70 tanaman TOGA tertanam di RTH</li>
+              <li>Sistem hidroponik terbangun</li>
+              <li>Inisiasi kelompok pengolah sampah</li>
+              <li>Mural edukatif 3×2 meter dibuat</li>
+            </ul>
+          </div>
+          <div class="suc-card sc-eco">
+            <h4>💼 Ekonomi</h4>
+            <ul>
+              <li>Database UMK Lingkungan II tersusun</li>
+              <li>5 pelaku usaha aktifasi QRIS</li>
+              <li>57 peserta pelatihan rajut tas</li>
+              <li>Kelompok "Rajut Berkah" terbentuk</li>
+            </ul>
+          </div>
+          <div class="suc-card sc-hlt" style="border-color:#64B5F6">
+            <h4 style="color:rgba(255,255,255,0.9)">❤️ Kesehatan & 📚 Pendidikan</h4>
+            <ul>
+              <li>18 ibu hamil/menyusui teredukasi</li>
+              <li>Peningkatan skor 66,3 → 97,8 (+32,2%)</li>
+              <li>35 siswa SD teredukasi anti-bullying</li>
+              <li>Semua siswa memahami cara lapor</li>
+            </ul>
+          </div>
+        </div>
+        <div class="all-100">
+          <div class="big">100%</div>
+          <div class="text">
+            <h4>Seluruh Program Kerja Terlaksana dengan Tingkat Keberhasilan Penuh</h4>
+            <p>Tidak ada kendala berarti. Antusiasme warga dan dukungan penuh aparatur Kelurahan Way Lunik 2 menjadi kunci keberhasilan. Semua program melampaui target peserta yang ditetapkan.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SLIDE 10 – PENUTUP ============ -->
+  <div class="slide" id="s10">
+    <div class="bg-mesh"></div>
+    <div class="grid-lines"></div>
+    <div class="gold-bar"></div>
+    <div class="content">
+      <div class="eyebrow">Penutup · Terima Kasih</div>
+      <h2>Bersama Membangun<br/><em>Way Lunik</em></h2>
+      <div class="divider"></div>
+      <p class="thanks">Program KKN Universitas Lampung 2026 di Kelurahan Way Lunik telah memberikan kontribusi nyata bagi masyarakat di empat bidang utama. Semoga hasil program ini dapat terus berkembang dan membawa perubahan positif yang berkelanjutan.</p>
+      <div class="footer-info">
+        <div class="fi"><div class="fv">13 Mahasiswa</div><div class="fl">Tim KKN</div></div>
+        <div class="fi"><div class="fv">10 Program Studi</div><div class="fl">Lintas Keilmuan</div></div>
+        <div class="fi"><div class="fv">31 Hari</div><div class="fl">Pengabdian</div></div>
+        <div class="fi"><div class="fv">6 Program</div><div class="fl">100% Terlaksana</div></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /.deck -->
+
+<!-- Navigation -->
+<div class="nav">
+  <button onclick="prevSlide()" title="Previous">&#8592;</button>
+  <div class="nav-dots" id="navDots"></div>
+  <button onclick="nextSlide()" title="Next">&#8594;</button>
+  <span class="nav-counter" id="navCounter">1 / 10</span>
+</div>
+
+<div class="key-hint">← → atau klik navigasi</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+let current = 0;
+
+// Build dots
+const dotsEl = document.getElementById('navDots');
+for (let i = 0; i < total; i++) {
+  const d = document.createElement('div');
+  d.className = 'nav-dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => goTo(i);
+  dotsEl.appendChild(d);
+}
+
+function goTo(n) {
+  slides[current].classList.remove('active');
+  slides[current].classList.add('prev');
+  setTimeout(() => slides[current].classList.remove('prev'), 600);
+
+  current = (n + total) % total;
+  slides[current].classList.add('active');
+
+  document.querySelectorAll('.nav-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === current);
+  });
+  document.getElementById('navCounter').textContent = `${current + 1} / ${total}`;
+}
+
+function nextSlide() { goTo(current + 1); }
+function prevSlide() { goTo(current - 1); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')                    { e.preventDefault(); prevSlide(); }
+});
+
+// Touch/swipe
+let tx = 0;
+document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+document.addEventListener('touchend',   e => {
+  const dx = e.changedTouches[0].clientX - tx;
+  if (Math.abs(dx) > 50) dx < 0 ? nextSlide() : prevSlide();
+});
+</script>
+</body>
+</html>
